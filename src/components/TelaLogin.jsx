@@ -27,24 +27,24 @@ function TelaLogin({ setView, users, onLoginSuccess }) {
   return (
     <VStack spacing={4} w="100%" align="stretch">
       <InputGroup>
-        <InputLeftElement pointerEvents="none"><Icon as={FaUser} color="gray.400" /></InputLeftElement>
+        <InputLeftElement pointerEvents="none"><Icon as={FaUser} color="#A0AEC0" /></InputLeftElement>
         <Input variant="custom" placeholder="CPF ou CNPJ" value={cpf}
           onChange={e => setCpf(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && handleLogin()} />
       </InputGroup>
       <InputGroup>
-        <InputLeftElement pointerEvents="none"><Icon as={FaLock} color="gray.400" /></InputLeftElement>
+        <InputLeftElement pointerEvents="none"><Icon as={FaLock} color="#A0AEC0" /></InputLeftElement>
         <Input variant="custom" type="password" placeholder="Senha" value={senha}
           onChange={e => setSenha(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && handleLogin()} />
       </InputGroup>
-      <Link color="white" fontSize="0.85em" alignSelf="flex-end" onClick={() => setView('recovery')}>
+      <Link color="white" fontSize="13px" alignSelf="flex-end" onClick={() => setView('recovery')}>
         Esqueceu sua senha?
       </Link>
-      <Button bgGradient="linear(to-r, #000080, #0000cc)" color="white" onClick={handleLogin}>
+      <Button bgGradient="linear(to-r, #2B6CB0, #4299E1)" color="white" onClick={handleLogin}>
         ENTRAR
       </Button>
-      <Text color="white" fontSize="0.9em" textAlign="center">Primeiro acesso?</Text>
+      <Text color="white" fontSize="14px" textAlign="center">Primeiro acesso?</Text>
       <Button colorScheme="registerBtn" color="black" onClick={() => setView('register')}>
         CADASTRE-SE
       </Button>

@@ -9,7 +9,7 @@ function AppHeader({ title, saldo = 0, onHome, onBack, onMenuOpen, showBalance =
 
   return (
     <>
-      <Flex as="header" align="center" p={4} bg="black" color="white">
+      <Flex as="header" align="center" p={4} bg="#1A202C" color="white">
         {onBack
           ? <Icon as={FaArrowLeft} boxSize={6} cursor="pointer" onClick={onBack} />
           : <Icon as={FaHouse} boxSize={6} cursor="pointer" onClick={onHome} />
@@ -21,10 +21,10 @@ function AppHeader({ title, saldo = 0, onHome, onBack, onMenuOpen, showBalance =
       </Flex>
 
       {showBalance && (
-        <Flex align="center" p={3} bg="#000080" color="white">
+        <Flex align="center" p={3} bg="#2B6CB0" color="white">
           <Icon as={FaRotateRight} boxSize={5} cursor="pointer" />
           <Spacer />
-          <Text fontWeight="bold" fontSize="17px">
+          <Text fontWeight="bold" fontSize="18px">
             {balanceVisible ? formatBRL(saldo) : 'R$ *****,**'}
           </Text>
           <Box ml={2} cursor="pointer" onClick={() => setBalanceVisible(v => !v)}>

@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find '/c/Users/Legendary Comber/Documents/Zbixo' -not -path */node_modules/* -type f)",
+      "Bash(mkdir -p \"/c/Users/Legendary Comber/Documents/Zbixo/public/fonts\")",
+      "Bash(curl -O https://app.mega-bixo.com/assets/fonts/barao-font.woff)",
+      "Bash(curl -sO \"https://app.mega-bixo.com/icons/LOTERIAS.webp\")",
+      "Bash(curl -sO \"https://app.mega-bixo.com/icons/QUININHA.webp\")",
+      "Bash(curl -sO \"https://app.mega-bixo.com/icons/SENINHA.webp\")",
+      "Bash(curl -sO \"https://app.mega-bixo.com/icons/LOTINHA.webp\")",
+      "Bash(curl -sO \"https://app.mega-bixo.com/icons/FAZENDINHA2.webp\")",
+      "Bash(mkdir -p pule)",
+      "Bash(curl -so pule/10.webp \"https://app.mega-bixo.com/pule/10.webp\")",
+      "Bash(curl -so pule/1ao5.webp \"https://app.mega-bixo.com/pule/1ao5.webp\")",
+      "Bash(curl -so pule/6ao9.webp \"https://app.mega-bixo.com/pule/6ao9.webp\")",
+      "Bash(curl -sO \"https://app.mega-bixo.com/roulette/wheel.webp\")",
+      "Bash(npx vite:*)"
+    ]
+  }
+}

@@ -3,8 +3,8 @@ import {
   Box, Flex, VStack, Text, Image, Button, Icon,
   SimpleGrid, Divider, Spacer, Heading
 } from '@chakra-ui/react';
-import { 
-  FaBars, FaEye, FaEyeSlash, FaRotateRight, 
+import {
+  FaBars, FaEye, FaEyeSlash, FaRotateRight,
   FaArrowLeft
 } from 'react-icons/fa6';
 
@@ -38,33 +38,30 @@ const bichosData = [
 
 const BichoCard = ({ bicho }) => (
   <Box
-    position="relative" 
+    position="relative"
     bg="white"
     border="1px solid"
-    borderColor="gray.300"
+    borderColor="#EDF2F7"
     borderRadius="lg"
     p={2}
-    boxShadow="md"
+    boxShadow="0 1px 3px rgba(0,0,0,0.06)"
   >
     <Text
       position="absolute"
       top="8px"
       left="8px"
       fontWeight="bold"
-      fontSize="sm" 
+      fontSize="13px"
     >
       {bicho.n}
     </Text>
-    
-    <VStack spacing={1} align="center" pt={5}> 
+
+    <VStack spacing={1} align="center" pt={5}>
       <Image src={bicho.img} alt={`Bicho ${bicho.n}`} boxSize="50px" objectFit="contain" />
-      {
-        
-      }
-      <Text 
-        fontSize="10px" 
-        color="gray.600" 
-        fontWeight="bold" 
+      <Text
+        fontSize="10px"
+        color="#4A5568"
+        fontWeight="bold"
         whiteSpace="nowrap"
       >
         {bicho.nums}
@@ -75,22 +72,22 @@ const BichoCard = ({ bicho }) => (
 
 
 function TabelaBichosView({ setAppView, onMenuOpen }) {
-  
+
   const [isBalanceVisible, setIsBalanceVisible] = useState(false);
 
   return (
-    <Box 
-      bg="#f0f2f5" 
-      w="100%" 
-      minH="100vh" 
+    <Box
+      bg="#F7FAFC"
+      w="100%"
+      minH="100vh"
       color="black"
       border="1px solid"
-      borderColor="gray.300"
+      borderColor="#EDF2F7"
     >
-      
-      <Flex 
-        as="header" align="center" p={4} 
-        bg="black" color="white"
+
+      <Flex
+        as="header" align="center" p={4}
+        bg="#1A202C" color="white"
       >
         <Icon as={FaArrowLeft} boxSize={6} cursor="pointer" onClick={() => setAppView('tipoDeJogo')} />
         <Spacer />
@@ -99,35 +96,35 @@ function TabelaBichosView({ setAppView, onMenuOpen }) {
         <Icon as={FaBars} boxSize={6} onClick={onMenuOpen} cursor="pointer" />
       </Flex>
 
-      <Flex 
-        align="center" 
-        p={3} 
-        bg="#000080" 
+      <Flex
+        align="center"
+        p={3}
+        bg="#2B6CB0"
         color="white"
       >
         <Icon as={FaRotateRight} boxSize={5} cursor="pointer" />
-        <Spacer /> 
-        <Text 
-          fontWeight="bold" 
-          fontSize="18px" 
+        <Spacer />
+        <Text
+          fontWeight="bold"
+          fontSize="18px"
           color="white"
         >
           {isBalanceVisible ? 'R$ 1.234,56' : 'R$ ****,**'}
         </Text>
-        <Icon 
+        <Icon
           as={isBalanceVisible ? FaEyeSlash : FaEye}
-          boxSize={5} 
+          boxSize={5}
           cursor="pointer"
           color="white"
           onClick={() => setIsBalanceVisible(!isBalanceVisible)}
-          ml={2} 
+          ml={2}
         />
       </Flex>
-      
+
       <VStack spacing={4} p={4} align="stretch">
-        
-        <Heading 
-          size="sm" 
+
+        <Heading
+          size="sm"
           textAlign="left"
           mb={2}
         >
@@ -139,9 +136,9 @@ function TabelaBichosView({ setAppView, onMenuOpen }) {
             <BichoCard key={bicho.n} bicho={bicho} />
           ))}
         </SimpleGrid>
-        
+
       </VStack>
-      
+
     </Box>
   );
 }

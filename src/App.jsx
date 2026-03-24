@@ -67,7 +67,7 @@ function App() {
   const Placeholder = ({ title }) => (
     <Box bg="white" w="100%" minH="100vh" p={8} textAlign="center">
       <Button mb={4} onClick={() => setAppView('dashboard')}>← Voltar</Button>
-      <Box mt={8} color="gray.400" fontSize="lg">{title} — Em breve</Box>
+      <Box mt={8} color="#A0AEC0" fontSize="16px">{title} — Em breve</Box>
     </Box>
   );
 
@@ -95,15 +95,15 @@ function App() {
   };
 
   return (
-    <Box bg={currentUser ? '#f0f2f5' : 'containerBg'}
+    <Box bg={currentUser ? '#F7FAFC' : 'containerBg'}
       w="100%" maxW="420px" minH="100vh"
-      boxShadow="0 0 20px rgba(0,0,0,0.3)" position="relative">
+      boxShadow="0 0 20px rgba(0,0,0,0.06)" position="relative">
       {currentUser ? renderApp() : (
         <Flex direction="column" align="center" justify="center" py="30px" px="25px" minH="100vh">
           <Image src="https://i.imgur.com/65xP0q1.png" alt="Logo"
             w="140px" h="140px" borderRadius="full" mb="30px" mt="20px" />
           <Button variant="outline" color="white" borderColor="white" borderRadius="20px"
-            fontSize="0.9em" w="100%" mb="25px" _hover={{ bg: 'rgba(255,255,255,0.1)' }}
+            fontSize="14px" w="100%" mb="25px" _hover={{ bg: 'rgba(255,255,255,0.1)' }}
             rightIcon={<Icon as={FaWhatsapp} fontSize="1.2em" />}>
             CHAMAR PROMOTOR AGORA
           </Button>

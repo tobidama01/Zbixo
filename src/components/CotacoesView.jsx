@@ -3,8 +3,8 @@ import {
   Box, Flex, VStack, Text, Button, Icon,
   Spacer, Heading, Divider
 } from '@chakra-ui/react';
-import { 
-  FaBars, FaRotateRight, 
+import {
+  FaBars, FaRotateRight,
   FaArrowLeft, FaChevronRight,
   FaEye, FaEyeSlash
 } from 'react-icons/fa6';
@@ -16,33 +16,33 @@ const CotacaoItem = ({ text, ...props }) => (
     p={4}
     align="center"
     borderBottom="1px solid"
-    borderColor="gray.200"
-    _hover={{ bg: 'gray.50' }}
-    {...props} 
+    borderColor="#EDF2F7"
+    _hover={{ bg: '#F7FAFC' }}
+    {...props}
   >
     <Text fontWeight="bold">{text}</Text>
     <Spacer />
-    <Icon as={FaChevronRight} color="gray.400" />
+    <Icon as={FaChevronRight} color="#A0AEC0" />
   </Flex>
 );
 
 function CotacoesView({ setAppView, onMenuOpen }) {
-  
+
   const [isBalanceVisible, setIsBalanceVisible] = useState(false);
 
   return (
-    <Box 
+    <Box
       bg="white"
-      w="100%" 
-      minH="100vh" 
+      w="100%"
+      minH="100vh"
       color="black"
       border="1px solid"
-      borderColor="gray.300"
+      borderColor="#EDF2F7"
     >
-      
-      <Flex 
-        as="header" align="center" p={4} 
-        bg="black" color="white"
+
+      <Flex
+        as="header" align="center" p={4}
+        bg="#1A202C" color="white"
       >
         <Icon as={FaArrowLeft} boxSize={6} cursor="pointer" onClick={() => setAppView('relatorios')} />
         <Spacer />
@@ -51,40 +51,40 @@ function CotacoesView({ setAppView, onMenuOpen }) {
         <Icon as={FaBars} boxSize={6} onClick={onMenuOpen} cursor="pointer" />
       </Flex>
 
-      <Flex 
-        align="center" 
-        p={3} 
-        bg="#000080"
+      <Flex
+        align="center"
+        p={3}
+        bg="#2B6CB0"
         color="white"
       >
         <Icon as={FaRotateRight} boxSize={5} cursor="pointer" />
-        <Spacer /> 
-        <Text 
-          fontWeight="bold" 
-          fontSize="18px" 
+        <Spacer />
+        <Text
+          fontWeight="bold"
+          fontSize="18px"
           color="white"
         >
           {isBalanceVisible ? 'R$ 1.234,56' : 'R$ ****,**'}
         </Text>
-        <Icon 
+        <Icon
           as={isBalanceVisible ? FaEyeSlash : FaEye}
-          boxSize={5} 
+          boxSize={5}
           cursor="pointer"
           color="white"
           onClick={() => setIsBalanceVisible(!isBalanceVisible)}
-          ml={2} 
+          ml={2}
         />
       </Flex>
-      
+
       <VStack spacing={0} p={0} align="stretch">
-        
+
         <CotacaoItem text="LOTERIAS" onClick={() => setAppView('loteriasCotacao')} />
-        
+
         <CotacaoItem text="QUININHA" />
         <CotacaoItem text="SENINHA" />
         <CotacaoItem text="LOTINHA" />
       </VStack>
-      
+
     </Box>
   );
 }

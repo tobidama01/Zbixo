@@ -3,10 +3,10 @@ import {
   Box, Flex, VStack, Text, Button, Icon,
   Spacer, Heading, Divider
 } from '@chakra-ui/react';
-import { 
-  FaBars, FaRotateRight, 
-  FaEye, FaEyeSlash, 
-  FaArrowLeft, 
+import {
+  FaBars, FaRotateRight,
+  FaEye, FaEyeSlash,
+  FaArrowLeft,
   FaFileLines
 } from 'react-icons/fa6';
 import jsPDF from 'jspdf';
@@ -27,21 +27,21 @@ const cotacoesData = [
   { nome: 'QUADRA GP', valor: 'R$ 100,00' },
   { nome: 'PALPITAO', valor: 'R$ 80,00' },
   { nome: 'PASSE VAI', valor: 'R$ 45,00' },
-  { nome: 'PASSE VAI VEM', valor: 'R$ 45,00' }, 
+  { nome: 'PASSE VAI VEM', valor: 'R$ 45,00' },
 ];
 
 const CotacaoRow = ({ nome, valor }) => (
-  <Flex justify="space-between" py={2} borderBottom="1px solid" borderColor="gray.200">
-    <Text>{nome}</Text>
-    <Text>{valor}</Text> 
+  <Flex justify="space-between" py={2} borderBottom="1px solid" borderColor="#EDF2F7">
+    <Text fontSize="14px">{nome}</Text>
+    <Text fontSize="14px">{valor}</Text>
   </Flex>
 );
 
 function LoteriasCotacaoView({ setAppView, onMenuOpen, currentUser }) {
-  
+
   const [isBalanceVisible, setIsBalanceVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const dataExibicao = new Date().toLocaleDateString('pt-BR');
   const horaExibicao = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
@@ -53,38 +53,38 @@ function LoteriasCotacaoView({ setAppView, onMenuOpen, currentUser }) {
     const dataFormatada = dataAtual.toLocaleDateString('pt-BR').replace
     const fileName = `cotacao_ZBIXO_${dataFormatada}_${horaFormatada}.pdf`;
 
-    html2canvas(pdfContent, { 
+    html2canvas(pdfContent, {
       scale: 2,
-      useCORS: true 
+      useCORS: true
     }).then((canvas) => {
       const canvasWidth = canvas.width;
       const canvasHeight = canvas.height;
-      
-      const pdfWidth = 210; 
-      const pdfHeight = (canvasHeight * pdfWidth) / canvasWidth; 
 
-      const pdf = new jsPDF('p', 'mm', [pdfWidth, pdfHeight]); 
+      const pdfWidth = 210;
+      const pdfHeight = (canvasHeight * pdfWidth) / canvasWidth;
+
+      const pdf = new jsPDF('p', 'mm', [pdfWidth, pdfHeight]);
 
       pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, pdfWidth, pdfHeight);
-      
+
       pdf.save(fileName);
       setIsLoading(false);
     });
   };
 
   return (
-    <Box 
+    <Box
       bg="white"
-      w="100%" 
-      minH="100vh" 
+      w="100%"
+      minH="100vh"
       color="black"
       border="1px solid"
-      borderColor="gray.300"
+      borderColor="#EDF2F7"
     >
-      
-      <Flex 
-        as="header" align="center" p={4} 
-        bg="black" color="white"
+
+      <Flex
+        as="header" align="center" p={4}
+        bg="#1A202C" color="white"
       >
         <Icon as={FaArrowLeft} boxSize={6} cursor="pointer" onClick={() => setAppView('cotacoes')} />
         <Spacer />
@@ -93,40 +93,40 @@ function LoteriasCotacaoView({ setAppView, onMenuOpen, currentUser }) {
         <Icon as={FaBars} boxSize={6} onClick={onMenuOpen} cursor="pointer" />
       </Flex>
 
-      <Flex 
-        align="center" 
-        p={3} 
-        bg="#000080" 
+      <Flex
+        align="center"
+        p={3}
+        bg="#2B6CB0"
         color="white"
       >
         <Icon as={FaRotateRight} boxSize={5} cursor="pointer" />
-        <Spacer /> 
-        <Text 
-          fontWeight="bold" 
-          fontSize="18px" 
+        <Spacer />
+        <Text
+          fontWeight="bold"
+          fontSize="18px"
           color="white"
         >
           {isBalanceVisible ? 'R$ 1.234,56' : 'R$ ****,**'}
         </Text>
-        <Icon 
+        <Icon
           as={isBalanceVisible ? FaEyeSlash : FaEye}
-          boxSize={5} 
+          boxSize={5}
           cursor="pointer"
           color="white"
           onClick={() => setIsBalanceVisible(!isBalanceVisible)}
-          ml={2} 
+          ml={2}
         />
       </Flex>
-      
+
       <VStack spacing={4} p={4} align="stretch" bg="white">
 
         <VStack id="pdf-content-wrapper" spacing={4} align="stretch">
-          
+
           <Heading size="md" textAlign="center" my={2}>
             ZBIXO
           </Heading>
 
-          <Flex justify="space-between" fontSize="sm">
+          <Flex justify="space-between" fontSize="13px">
             <VStack align="flex-start" spacing={0}>
               <Text fontWeight="bold">VENDEDOR</Text>
               <Text>{dataExibicao}</Text>
@@ -136,10 +136,10 @@ function LoteriasCotacaoView({ setAppView, onMenuOpen, currentUser }) {
               <Text>{horaExibicao}</Text>
             </VStack>
           </Flex>
-          
+
           <Divider />
 
-          <Flex justify="space-between" fontSize="sm">
+          <Flex justify="space-between" fontSize="13px">
             <VStack align="flex-start" spacing={0}>
               <Text fontWeight="bold">TABELA DE COTAÇÃO</Text>
               <Text>VALOR PRA CADA</Text>
@@ -151,24 +151,24 @@ function LoteriasCotacaoView({ setAppView, onMenuOpen, currentUser }) {
           </Flex>
 
           <Divider />
-          
+
           <Box textAlign="center" py={2}>
-            <Text fontWeight="bold" fontSize="sm">PARA DUQUE GP e TERNO GP</Text>
-            <Text fontSize="xs">VALOR VÁLIDO PARA APOSTA SECA</Text>
+            <Text fontWeight="bold" fontSize="13px">PARA DUQUE GP e TERNO GP</Text>
+            <Text fontSize="12px">VALOR VÁLIDO PARA APOSTA SECA</Text>
           </Box>
 
-          <VStack spacing={0} align="stretch" bg="white" p={4} borderRadius="md" border="1px solid" borderColor="gray.200">
+          <VStack spacing={0} align="stretch" bg="white" p={4} borderRadius="md" border="1px solid" borderColor="#EDF2F7">
             {cotacoesData.map((cotacao) => (
               <CotacaoRow key={cotacao.nome} nome={cotacao.nome} valor={cotacao.valor} />
             ))}
           </VStack>
-        
-        </VStack> 
 
-        <Button 
-          colorScheme="blackBtn" 
-          color="white" 
-          height="50px" 
+        </VStack>
+
+        <Button
+          colorScheme="blackBtn"
+          color="white"
+          height="50px"
           leftIcon={<Icon as={FaFileLines} />}
           onClick={handleShare}
           isLoading={isLoading}
@@ -176,9 +176,9 @@ function LoteriasCotacaoView({ setAppView, onMenuOpen, currentUser }) {
         >
           Compartilhar
         </Button>
-        
+
       </VStack>
-      
+
     </Box>
   );
 }

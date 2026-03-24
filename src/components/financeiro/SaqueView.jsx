@@ -11,7 +11,6 @@ import { FaMoneyBill } from 'react-icons/fa6';
 
 const TIPOS_CHAVE = ['Celular', 'CPF', 'E-mail', 'CNPJ', 'Chave aleatória'];
 
-// ── Validadores por tipo de chave ─────────────────────────────────────────────
 function validarChave(tipo, valor) {
   const v = valor.trim();
 
@@ -26,7 +25,6 @@ function validarChave(tipo, valor) {
     const digits = v.replace(/\D/g, '');
     if (digits.length !== 11)
       return 'CPF deve ter 11 dígitos';
-    // Validação módulo 11
     if (/^(\d)\1+$/.test(digits)) return 'CPF inválido';
     let sum = 0;
     for (let i = 0; i < 9; i++) sum += parseInt(digits[i]) * (10 - i);
@@ -55,7 +53,6 @@ function validarChave(tipo, valor) {
     if (digits.length !== 14)
       return 'CNPJ deve ter 14 dígitos';
     if (/^(\d)\1+$/.test(digits)) return 'CNPJ inválido';
-    // Validação dígitos verificadores
     const calc = (d, n) => {
       let sum = 0, pos = n - 7;
       for (let i = n; i >= 1; i--) {
@@ -79,7 +76,6 @@ function validarChave(tipo, valor) {
   return null;
 }
 
-// ── Máscara por tipo ──────────────────────────────────────────────────────────
 function aplicarMascara(tipo, valor) {
   const digits = valor.replace(/\D/g, '');
 
@@ -105,7 +101,6 @@ function aplicarMascara(tipo, valor) {
   return valor;
 }
 
-// ── Limite de caracteres por tipo ─────────────────────────────────────────────
 function maxLength(tipo) {
   if (tipo === 'Celular')        return 15;
   if (tipo === 'CPF')            return 14;
@@ -115,7 +110,6 @@ function maxLength(tipo) {
   return 100;
 }
 
-// ── Placeholder por tipo ──────────────────────────────────────────────────────
 function placeholder(tipo) {
   if (tipo === 'Celular')        return '(11) 99999-9999';
   if (tipo === 'CPF')            return '000.000.000-00';
@@ -141,13 +135,11 @@ function SaqueView({ onBack, onMenuOpen, currentUser, registrarSaque, transacoes
     const tipo = tipoChave;
     let v = e.target.value;
 
-    // Aplica máscara para tipos com dígitos
     if (['Celular', 'CPF', 'CNPJ'].includes(tipo)) {
       v = aplicarMascara(tipo, v);
     }
 
     setChave(v);
-    // Limpa erro ao digitar
     if (chaveErro) setChaveErro('');
   };
 
@@ -171,7 +163,6 @@ function SaqueView({ onBack, onMenuOpen, currentUser, registrarSaque, transacoes
 
   const handleValorChange = (e) => {
     const v = e.target.value;
-    // Só aceita números e ponto/vírgula
     if (!/^\d*[.,]?\d{0,2}$/.test(v)) return;
     setValor(v);
     if (valorErro) setValorErro('');
@@ -215,7 +206,7 @@ function SaqueView({ onBack, onMenuOpen, currentUser, registrarSaque, transacoes
       <Box p={4}>
         {passo === 'form' && (
           <>
-            <Button w="full" bg="black" color="white" h="50px" mb={4}
+            <Button w="full" bg="#1A202C" color="white" h="50px" mb={4}
               leftIcon={<Icon as={FaMoneyBill} />}
               onClick={() => setPasso('pix')}>
               Sacar
@@ -223,14 +214,14 @@ function SaqueView({ onBack, onMenuOpen, currentUser, registrarSaque, transacoes
 
             {saques.length > 0 && (
               <>
-                <Text fontWeight="bold" mb={2}>Histórico de saques:</Text>
+                <Text fontWeight="bold" mb={2} fontSize="14px">Histórico de saques:</Text>
                 <VStack spacing={2} align="stretch">
                   {saques.slice(0, 10).map(s => (
-                    <Flex key={s.id} p={3} bg="gray.50" borderRadius="md" align="center">
+                    <Flex key={s.id} p={3} bg="#F7FAFC" borderRadius="md" align="center">
                       <Box>
-                        <Text fontSize="sm" fontWeight="bold">{formatBRL(s.valor)}</Text>
-                        <Text fontSize="xs" color="gray.500">{s.chavePix} ({s.tipoChave})</Text>
-                        <Text fontSize="xs" color="gray.400">
+                        <Text fontSize="13px" fontWeight="bold">{formatBRL(s.valor)}</Text>
+                        <Text fontSize="12px" color="#A0AEC0">{s.chavePix} ({s.tipoChave})</Text>
+                        <Text fontSize="12px" color="#A0AEC0">
                           {new Date(s.data).toLocaleDateString('pt-BR')}
                         </Text>
                       </Box>
@@ -248,30 +239,30 @@ function SaqueView({ onBack, onMenuOpen, currentUser, registrarSaque, transacoes
 
         {passo === 'pix' && (
           <>
-            <Box bg="orange.50" border="1px solid" borderColor="orange.200"
+            <Box bg="#FEEBC8" border="1px solid" borderColor="#C9A058"
               borderRadius="md" p={4} mb={4}>
-              <Text fontWeight="bold" mb={2}>Regras de saque</Text>
-              <Text fontSize="sm">Os saques podem ser feitos para qualquer chave pix, desde que sejam feitos para sua{' '}
-                <Text as="span" color="red.500" fontWeight="bold">titularidade.</Text>
+              <Text fontWeight="bold" mb={2} fontSize="14px">Regras de saque</Text>
+              <Text fontSize="13px">Os saques podem ser feitos para qualquer chave pix, desde que sejam feitos para sua{' '}
+                <Text as="span" color="#E53E3E" fontWeight="bold">titularidade.</Text>
               </Text>
-              <Text fontSize="sm" mt={2}><strong>Horários de pagamento:</strong> 24 horas.</Text>
-              <Text fontSize="sm"><strong>Tempo para valor em conta:</strong> 2-5 dias.</Text>
-              <Text fontSize="sm"><strong>Saque mínimo:</strong> R$ 20,00</Text>
-              <Text fontSize="sm"><strong>Saque máximo:</strong> R$ 2.500,00</Text>
-              <Text fontSize="sm"><strong>Limite diário:</strong> R$ 15.000,00</Text>
-              <Text fontSize="sm"><strong>Taxa de saque:</strong> 0%</Text>
-              <Text color="red.500" fontSize="sm" fontWeight="bold" mt={2}>
+              <Text fontSize="13px" mt={2}><strong>Horários de pagamento:</strong> 24 horas.</Text>
+              <Text fontSize="13px"><strong>Tempo para valor em conta:</strong> 2-5 dias.</Text>
+              <Text fontSize="13px"><strong>Saque mínimo:</strong> R$ 20,00</Text>
+              <Text fontSize="13px"><strong>Saque máximo:</strong> R$ 2.500,00</Text>
+              <Text fontSize="13px"><strong>Limite diário:</strong> R$ 15.000,00</Text>
+              <Text fontSize="13px"><strong>Taxa de saque:</strong> 0%</Text>
+              <Text color="#E53E3E" fontSize="13px" fontWeight="bold" mt={2}>
                 Saques que não atenderem as regras acima serão recusados.
               </Text>
             </Box>
 
-            <Box bg="white" border="1px solid" borderColor="gray.200"
+            <Box bg="white" border="1px solid" borderColor="#EDF2F7"
               borderRadius="md" p={4} mb={4}>
-              <Text fontWeight="bold" mb={3}>Dados do PIX</Text>
+              <Text fontWeight="bold" mb={3} fontSize="14px">Dados do PIX</Text>
 
               <Select placeholder="Selecione a chave PIX" value={tipoChave}
                 onChange={e => { setTipoChave(e.target.value); setChave(''); setChaveErro(''); }}
-                mb={3} borderColor="blue.400" borderWidth="2px">
+                mb={3} borderColor="#4299E1" borderWidth="2px" fontSize="14px">
                 {TIPOS_CHAVE.map(t => <option key={t} value={t}>{t}</option>)}
               </Select>
 
@@ -282,19 +273,20 @@ function SaqueView({ onBack, onMenuOpen, currentUser, registrarSaque, transacoes
                     value={chave}
                     onChange={handleChaveChange}
                     maxLength={maxLength(tipoChave)}
-                    borderColor={chaveErro ? 'red.400' : 'blue.400'}
+                    borderColor={chaveErro ? '#E53E3E' : '#4299E1'}
                     borderWidth="2px"
+                    fontSize="14px"
                     inputMode={['Celular','CPF','CNPJ'].includes(tipoChave) ? 'numeric' : 'text'}
                   />
                   <FormErrorMessage>{chaveErro}</FormErrorMessage>
-                  <Text fontSize="xs" color="gray.400" mt={1} textAlign="right">
+                  <Text fontSize="12px" color="#A0AEC0" mt={1} textAlign="right">
                     {chave.length}/{maxLength(tipoChave)}
                   </Text>
                 </FormControl>
               )}
             </Box>
 
-            <Button w="full" bg="black" color="white" h="50px" onClick={avancar}>
+            <Button w="full" bg="#1A202C" color="white" h="50px" onClick={avancar}>
               Avançar
             </Button>
             <Button w="full" mt={2} variant="ghost" onClick={() => setPasso('form')}>
@@ -305,39 +297,40 @@ function SaqueView({ onBack, onMenuOpen, currentUser, registrarSaque, transacoes
 
         {passo === 'valor' && (
           <>
-            <Box bg="white" border="1px solid" borderColor="gray.200"
+            <Box bg="white" border="1px solid" borderColor="#EDF2F7"
               borderRadius="md" p={4} mb={4}>
-              <Text fontWeight="bold">Chave PIX</Text>
-              <Text fontSize="sm" color="gray.600">{tipoChave}: {chave}</Text>
+              <Text fontWeight="bold" fontSize="14px">Chave PIX</Text>
+              <Text fontSize="13px" color="#4A5568">{tipoChave}: {chave}</Text>
             </Box>
 
             <Alert status="info" borderRadius="md" mb={4}>
               <AlertIcon />
-              <Text fontSize="sm">Saldo disponível: <strong>{formatBRL(saldo)}</strong></Text>
+              <Text fontSize="13px">Saldo disponível: <strong>{formatBRL(saldo)}</strong></Text>
             </Alert>
 
             <FormControl isInvalid={!!valorErro} mb={4}>
-              <Text fontWeight="bold" mb={2}>Valor do saque:</Text>
+              <Text fontWeight="bold" mb={2} fontSize="14px">Valor do saque:</Text>
               <Input
                 type="text"
                 inputMode="decimal"
                 placeholder="Ex: 100,00"
                 value={valor}
                 onChange={handleValorChange}
-                borderColor={valorErro ? 'red.400' : 'blue.400'}
+                borderColor={valorErro ? '#E53E3E' : '#4299E1'}
                 borderWidth="2px"
                 maxLength={8}
+                fontSize="14px"
               />
               <FormErrorMessage>{valorErro}</FormErrorMessage>
             </FormControl>
 
             {valor && !isNaN(parseFloat(valor.replace(',', '.'))) && (
-              <Text fontSize="sm" color="gray.600" mb={4}>
+              <Text fontSize="13px" color="#4A5568" mb={4}>
                 Taxa: R$ 0,00 | Você receberá: <strong>{formatBRL(parseFloat(valor.replace(',', '.')))}</strong>
               </Text>
             )}
 
-            <Button w="full" bg="black" color="white" h="50px" onClick={confirmarSaque}>
+            <Button w="full" bg="#1A202C" color="white" h="50px" onClick={confirmarSaque}>
               Confirmar Saque
             </Button>
             <Button w="full" mt={2} variant="ghost" onClick={() => setPasso('pix')}>

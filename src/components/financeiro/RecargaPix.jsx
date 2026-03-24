@@ -37,7 +37,7 @@ function RecargaPix({ onBack, onMenuOpen, currentUser, registrarDeposito }) {
   const confirmarPagamento = () => {
     registrarDeposito(pixData.valor, pixData.txid);
     toast({
-      title: `✅ Depósito de ${formatBRL(pixData.valor)} confirmado!`,
+      title: `Depósito de ${formatBRL(pixData.valor)} confirmado!`,
       status: 'success', duration: 4000, position: 'top',
     });
     setPixData(null);
@@ -49,30 +49,29 @@ function RecargaPix({ onBack, onMenuOpen, currentUser, registrarDeposito }) {
       <AppHeader title="MEGABIXO" saldo={saldo} onBack={onBack} onMenuOpen={onMenuOpen} />
 
       <Box p={4}>
-        <Text fontWeight="bold" fontSize="lg" mb={1}>Recarga PIX</Text>
-        <Text color="gray.500" fontSize="sm" mb={5}>
+        <Text fontWeight="bold" fontSize="18px" mb={1}>Recarga PIX</Text>
+        <Text color="#A0AEC0" fontSize="13px" mb={5}>
           Informe o valor que deseja creditar no seu saldo para jogar.
         </Text>
 
         {!pixData ? (
           <>
-            {/* Campo de valor */}
-            <Box bg="gray.50" borderRadius="lg" mb={5}>
-              <Flex align="center" px={4} py={4} borderBottom="1px solid" borderColor="gray.200">
-                <Text fontSize="md" color="gray.500" mr={2}>R$</Text>
+            <Box bg="#F7FAFC" borderRadius="lg" mb={5}>
+              <Flex align="center" px={4} py={4} borderBottom="1px solid" borderColor="#EDF2F7">
+                <Text fontSize="14px" color="#A0AEC0" mr={2}>R$</Text>
                 <Input
                   variant="unstyled"
                   value={valor}
                   type="number"
                   placeholder="0,00"
-                  fontSize="xl"
+                  fontSize="20px"
                   fontWeight="bold"
                   onChange={e => setValor(e.target.value)}
                 />
                 <Button
                   variant="ghost"
                   size="sm"
-                  color="gray.400"
+                  color="#A0AEC0"
                   fontWeight="normal"
                   onClick={() => setValor('')}
                 >
@@ -81,7 +80,7 @@ function RecargaPix({ onBack, onMenuOpen, currentUser, registrarDeposito }) {
               </Flex>
 
               <Box px={4} py={3}>
-                <Text fontSize="sm" fontWeight="bold" mb={2}>Valores rápidos:</Text>
+                <Text fontSize="13px" fontWeight="bold" mb={2}>Valores rápidos:</Text>
                 <HStack spacing={2}>
                   {quickValues.map(v => (
                     <Button
@@ -90,7 +89,7 @@ function RecargaPix({ onBack, onMenuOpen, currentUser, registrarDeposito }) {
                       variant={valorNum === v ? 'solid' : 'outline'}
                       bg={valorNum === v ? 'white' : 'transparent'}
                       border="1px solid"
-                      borderColor="gray.300"
+                      borderColor="#EDF2F7"
                       borderRadius="md"
                       fontWeight="normal"
                       px={4}
@@ -105,11 +104,11 @@ function RecargaPix({ onBack, onMenuOpen, currentUser, registrarDeposito }) {
 
             <Button
               w="full"
-              bg="black"
+              bg="#1A202C"
               color="white"
               h="52px"
               borderRadius="lg"
-              fontSize="md"
+              fontSize="14px"
               isDisabled={valorNum < 5}
               onClick={gerarPagamento}
             >
@@ -120,37 +119,35 @@ function RecargaPix({ onBack, onMenuOpen, currentUser, registrarDeposito }) {
           <Box>
             <Alert status="info" borderRadius="md" mb={4}>
               <AlertIcon />
-              <Text fontSize="sm">
+              <Text fontSize="13px">
                 Pague o PIX abaixo para creditar <strong>{formatBRL(pixData.valor)}</strong> na sua conta.
               </Text>
             </Alert>
 
-            {/* QR Code simulado */}
-            <Box border="2px solid black" borderRadius="md" p={6} mb={4} textAlign="center">
+            <Box border="2px solid #1A202C" borderRadius="md" p={6} mb={4} textAlign="center">
               <Box
                 w="160px" h="160px" mx="auto"
                 bg="white"
-                border="1px solid black"
+                border="1px solid #1A202C"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
-                fontSize="xs"
-                color="gray.400"
+                fontSize="12px"
+                color="#A0AEC0"
               >
                 QR CODE PIX
               </Box>
               <Badge colorScheme="green" mt={3}>TXID: {pixData.txid}</Badge>
             </Box>
 
-            {/* Copia e cola */}
-            <Box bg="gray.50" p={3} borderRadius="md" mb={4}>
-              <Text fontSize="xs" color="gray.500" mb={1}>PIX Copia e Cola:</Text>
-              <Text fontSize="xs" fontFamily="mono" wordBreak="break-all">{pixData.copiaCola}</Text>
+            <Box bg="#F7FAFC" p={3} borderRadius="md" mb={4}>
+              <Text fontSize="12px" color="#A0AEC0" mb={1}>PIX Copia e Cola:</Text>
+              <Text fontSize="12px" fontFamily="mono" wordBreak="break-all">{pixData.copiaCola}</Text>
             </Box>
 
             <Button
               w="full" mb={2} h="50px" borderRadius="lg"
-              bg={copiado ? 'green.500' : 'black'} color="white"
+              bg={copiado ? '#38A169' : '#1A202C'} color="white"
               leftIcon={<Icon as={copiado ? FaCheck : FaCopy} />}
               onClick={copiar}
             >
@@ -159,16 +156,16 @@ function RecargaPix({ onBack, onMenuOpen, currentUser, registrarDeposito }) {
 
             <Divider my={3} />
 
-            <Text fontSize="sm" color="gray.400" textAlign="center" mb={3}>
+            <Text fontSize="13px" color="#A0AEC0" textAlign="center" mb={3}>
               Após pagar, clique em confirmar:
             </Text>
 
-            <Button w="full" h="50px" borderRadius="lg" bg="green.500" color="white"
+            <Button w="full" h="50px" borderRadius="lg" bg="#38A169" color="white"
               leftIcon={<Icon as={FaCheck} />} onClick={confirmarPagamento}>
               Confirmar Pagamento
             </Button>
 
-            <Button w="full" mt={2} variant="ghost" color="gray.500"
+            <Button w="full" mt={2} variant="ghost" color="#A0AEC0"
               onClick={() => setPixData(null)}>
               Cancelar
             </Button>

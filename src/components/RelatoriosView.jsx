@@ -15,14 +15,14 @@ function InnerHeader({ title, saldo, onBack }) {
   const [vis, setVis] = useState(false);
   return (
     <>
-      <Flex as="header" align="center" p={4} bg="black" color="white">
+      <Flex as="header" align="center" p={4} bg="#1A202C" color="white">
         <Icon as={FaArrowLeft} boxSize={5} cursor="pointer" onClick={onBack} />
         <Spacer />
         <Text fontWeight="bold" fontSize="13px" letterSpacing="1px">{title}</Text>
         <Spacer />
         <Text fontSize="13px">☰</Text>
       </Flex>
-      <Flex align="center" px={4} py={3} bg="#000080" color="white">
+      <Flex align="center" px={4} py={3} bg="#2B6CB0" color="white">
         <Icon as={FaRotateRight} boxSize={4} cursor="pointer" />
         <Spacer />
         <Text fontWeight="bold" fontSize="16px">
@@ -38,12 +38,12 @@ function InnerHeader({ title, saldo, onBack }) {
 // ── Item de lista genérico ─────────────────────────────────────────────────────
 const ReportItem = ({ icon, text, onClick }) => (
   <Flex as="button" w="100%" px={4} py={4} align="center"
-    borderBottom="1px solid" borderColor="gray.100" _hover={{ bg: 'gray.50' }}
+    borderBottom="1px solid" borderColor="gray.100" _hover={{ bg: '#F7FAFC' }}
     onClick={onClick}>
-    <Icon as={icon} boxSize={5} color="#000080" />
-    <Text fontWeight="bold" ml={4} fontSize="sm" color="#000080">{text}</Text>
+    <Icon as={icon} boxSize={5} color="#2B6CB0" />
+    <Text fontWeight="bold" ml={4} fontSize="13px" color="#2B6CB0">{text}</Text>
     <Spacer />
-    <Icon as={FaChevronRight} color="gray.400" boxSize={4} />
+    <Icon as={FaChevronRight} color="#A0AEC0" boxSize={4} />
   </Flex>
 );
 
@@ -57,10 +57,10 @@ function ListaDatas({ titulo, onBack, saldo }) {
         {dias.map(dia => (
           <Flex key={dia} px={4} py={4} align="center"
             borderBottom="1px solid" borderColor="gray.100"
-            cursor="pointer" _hover={{ bg: 'gray.50' }}>
-            <Text fontSize="sm">{dia}</Text>
+            cursor="pointer" _hover={{ bg: '#F7FAFC' }}>
+            <Text fontSize="13px">{dia}</Text>
             <Spacer />
-            <Icon as={FaChevronRight} color="gray.400" boxSize={4} />
+            <Icon as={FaChevronRight} color="#A0AEC0" boxSize={4} />
           </Flex>
         ))}
       </VStack>
@@ -85,15 +85,15 @@ function SaldoView({ onBack, saldo, transacoes }) {
           return (
             <Flex key={dia} px={4} py={4} align="center"
               borderBottom="1px solid" borderColor="gray.100"
-              cursor="pointer" _hover={{ bg: 'gray.50' }}>
-              <Text fontSize="sm">{dia}</Text>
+              cursor="pointer" _hover={{ bg: '#F7FAFC' }}>
+              <Text fontSize="13px">{dia}</Text>
               <Spacer />
               {txDia.length > 0 && (
-                <Text fontSize="xs" color={total >= 0 ? 'green.500' : 'red.500'} mr={2}>
+                <Text fontSize="12px" color={total >= 0 ? '#38A169' : '#E53E3E'} mr={2}>
                   {total >= 0 ? '+' : ''}{formatBRL(total)}
                 </Text>
               )}
-              <Icon as={FaChevronRight} color="gray.400" boxSize={4} />
+              <Icon as={FaChevronRight} color="#A0AEC0" boxSize={4} />
             </Flex>
           );
         })}
@@ -113,29 +113,29 @@ function PulesView({ onBack, saldo, apostas }) {
     <Box bg="white" w="100%" minH="100vh">
       <InnerHeader title="PULES" saldo={saldo} onBack={onBack} />
       {dias.length === 0
-        ? <Text p={8} textAlign="center" color="gray.400">Nenhuma aposta encontrada</Text>
+        ? <Text p={8} textAlign="center" color="#A0AEC0">Nenhuma aposta encontrada</Text>
         : (
           <Accordion allowToggle>
             {dias.map(dia => (
               <AccordionItem key={dia}>
                 <AccordionButton px={4} py={4}>
-                  <Text flex={1} textAlign="left" fontSize="sm">{dia}</Text>
+                  <Text flex={1} textAlign="left" fontSize="13px">{dia}</Text>
                   <AccordionIcon />
                 </AccordionButton>
                 <AccordionPanel pb={3} px={3}>
                   <VStack spacing={2} align="stretch">
                     {agrupadas[dia].map(a => (
-                      <Box key={a.id} p={3} bg="gray.50" borderRadius="md">
+                      <Box key={a.id} p={3} bg="#F7FAFC" borderRadius="md">
                         <Flex justify="space-between">
-                          <Text fontWeight="bold" fontSize="sm">{a.descricao}</Text>
+                          <Text fontWeight="bold" fontSize="13px">{a.descricao}</Text>
                           <Badge colorScheme={a.status === 'ativa' ? 'green' : 'gray'}>{a.status}</Badge>
                         </Flex>
-                        <Text fontSize="xs" color="gray.500">
+                        <Text fontSize="12px" color="#A0AEC0">
                           Palpites: {Array.isArray(a.palpites) ? a.palpites.join(', ') : a.palpites}
                         </Text>
                         <Flex justify="space-between" mt={1}>
-                          <Text fontSize="sm" fontWeight="bold">{formatBRL(a.valor)}</Text>
-                          <Text fontSize="xs" color="gray.400">Cód: {a.codigo}</Text>
+                          <Text fontSize="13px" fontWeight="bold">{formatBRL(a.valor)}</Text>
+                          <Text fontSize="12px" color="#A0AEC0">Cód: {a.codigo}</Text>
                         </Flex>
                       </Box>
                     ))}
@@ -164,27 +164,26 @@ function FazendinhaRelView({ onBack, saldo, apostas }) {
     <Box bg="white" w="100%" minH="100vh">
       <InnerHeader title="FAZENDINHA" saldo={saldo} onBack={onBack} />
 
-      {/* Resumo */}
-      <Box px={4} py={3} bg="gray.50" borderBottom="1px solid" borderColor="gray.200">
+      <Box px={4} py={3} bg="#F7FAFC" borderBottom="1px solid" borderColor="#EDF2F7">
         <Flex justify="space-between">
-          <Text fontSize="sm" color="gray.600">Total apostado:</Text>
-          <Text fontSize="sm" fontWeight="bold" color="red.500">- {formatBRL(totalGasto)}</Text>
+          <Text fontSize="13px" color="#4A5568">Total apostado:</Text>
+          <Text fontSize="13px" fontWeight="bold" color="#E53E3E">- {formatBRL(totalGasto)}</Text>
         </Flex>
         <Flex justify="space-between" mt={1}>
-          <Text fontSize="sm" color="gray.600">Total ganho:</Text>
-          <Text fontSize="sm" fontWeight="bold" color="green.500">R$ 0,00</Text>
+          <Text fontSize="13px" color="#4A5568">Total ganho:</Text>
+          <Text fontSize="13px" fontWeight="bold" color="#38A169">R$ 0,00</Text>
         </Flex>
       </Box>
 
       {dias.length === 0
-        ? <Text p={8} textAlign="center" color="gray.400">Nenhuma aposta de Fazendinha encontrada</Text>
+        ? <Text p={8} textAlign="center" color="#A0AEC0">Nenhuma aposta de Fazendinha encontrada</Text>
         : (
           <Accordion allowToggle>
             {dias.map(dia => (
               <AccordionItem key={dia}>
                 <AccordionButton px={4} py={4}>
-                  <Text flex={1} textAlign="left" fontSize="sm">{dia}</Text>
-                  <Text fontSize="xs" color="gray.500" mr={2}>
+                  <Text flex={1} textAlign="left" fontSize="13px">{dia}</Text>
+                  <Text fontSize="12px" color="#A0AEC0" mr={2}>
                     {agrupadas[dia].length} aposta(s)
                   </Text>
                   <AccordionIcon />
@@ -192,17 +191,17 @@ function FazendinhaRelView({ onBack, saldo, apostas }) {
                 <AccordionPanel pb={3} px={3}>
                   <VStack spacing={2} align="stretch">
                     {agrupadas[dia].map(a => (
-                      <Box key={a.id} p={3} bg="gray.50" borderRadius="md">
+                      <Box key={a.id} p={3} bg="#F7FAFC" borderRadius="md">
                         <Flex justify="space-between">
-                          <Text fontWeight="bold" fontSize="sm">{a.modalidadeNome}</Text>
+                          <Text fontWeight="bold" fontSize="13px">{a.modalidadeNome}</Text>
                           <Badge colorScheme={a.status === 'ativa' ? 'green' : 'gray'}>{a.status}</Badge>
                         </Flex>
-                        <Text fontSize="xs" color="gray.500">
+                        <Text fontSize="12px" color="#A0AEC0">
                           Palpites: {Array.isArray(a.palpites) ? a.palpites.join(', ') : a.palpites}
                         </Text>
                         <Flex justify="space-between" mt={1}>
-                          <Text fontSize="sm" fontWeight="bold" color="red.500">- {formatBRL(a.valor)}</Text>
-                          <Text fontSize="xs" color="gray.400">Cód: {a.codigo}</Text>
+                          <Text fontSize="13px" fontWeight="bold" color="#E53E3E">- {formatBRL(a.valor)}</Text>
+                          <Text fontSize="12px" color="#A0AEC0">Cód: {a.codigo}</Text>
                         </Flex>
                       </Box>
                     ))}
@@ -227,27 +226,27 @@ function RoletinhaRelView({ onBack, saldo, apostas }) {
     <Box bg="white" w="100%" minH="100vh">
       <InnerHeader title="ROLETINHA" saldo={saldo} onBack={onBack} />
 
-      <Box px={4} py={3} bg="gray.50" borderBottom="1px solid" borderColor="gray.200">
+      <Box px={4} py={3} bg="#F7FAFC" borderBottom="1px solid" borderColor="#EDF2F7">
         <Flex justify="space-between">
-          <Text fontSize="sm" color="gray.600">Apostou:</Text>
-          <Text fontSize="sm" fontWeight="bold" color="red.500">- {formatBRL(totalApostado)}</Text>
+          <Text fontSize="13px" color="#4A5568">Apostou:</Text>
+          <Text fontSize="13px" fontWeight="bold" color="#E53E3E">- {formatBRL(totalApostado)}</Text>
         </Flex>
         <Flex justify="space-between" mt={1}>
-          <Text fontSize="sm" color="gray.600">Ganhou:</Text>
-          <Text fontSize="sm" fontWeight="bold" color="green.500">+ {formatBRL(totalGanho)}</Text>
+          <Text fontSize="13px" color="#4A5568">Ganhou:</Text>
+          <Text fontSize="13px" fontWeight="bold" color="#38A169">+ {formatBRL(totalGanho)}</Text>
         </Flex>
       </Box>
 
       {dados.length === 0
-        ? <Text p={8} textAlign="center" color="gray.400">Nenhuma aposta de Roletinha encontrada</Text>
+        ? <Text p={8} textAlign="center" color="#A0AEC0">Nenhuma aposta de Roletinha encontrada</Text>
         : (
           <VStack spacing={0} align="stretch">
             {dados.map(a => (
               <Flex key={a.id} px={4} py={3} align="center"
                 borderBottom="1px solid" borderColor="gray.100">
                 <Box>
-                  <Text fontSize="sm" fontWeight="bold">{formatBRL(a.valor)}</Text>
-                  <Text fontSize="xs" color="gray.400">
+                  <Text fontSize="13px" fontWeight="bold">{formatBRL(a.valor)}</Text>
+                  <Text fontSize="12px" color="#A0AEC0">
                     {new Date(a.data).toLocaleDateString('pt-BR')}
                   </Text>
                 </Box>
@@ -274,27 +273,27 @@ function RaspadinhaRelView({ onBack, saldo, apostas }) {
     <Box bg="white" w="100%" minH="100vh">
       <InnerHeader title="RASPADINHA" saldo={saldo} onBack={onBack} />
 
-      <Box px={4} py={3} bg="gray.50" borderBottom="1px solid" borderColor="gray.200">
+      <Box px={4} py={3} bg="#F7FAFC" borderBottom="1px solid" borderColor="#EDF2F7">
         <Flex justify="space-between">
-          <Text fontSize="sm" color="gray.600">Apostou:</Text>
-          <Text fontSize="sm" fontWeight="bold" color="red.500">- {formatBRL(totalApostado)}</Text>
+          <Text fontSize="13px" color="#4A5568">Apostou:</Text>
+          <Text fontSize="13px" fontWeight="bold" color="#E53E3E">- {formatBRL(totalApostado)}</Text>
         </Flex>
         <Flex justify="space-between" mt={1}>
-          <Text fontSize="sm" color="gray.600">Ganhou:</Text>
-          <Text fontSize="sm" fontWeight="bold" color="green.500">+ {formatBRL(totalGanho)}</Text>
+          <Text fontSize="13px" color="#4A5568">Ganhou:</Text>
+          <Text fontSize="13px" fontWeight="bold" color="#38A169">+ {formatBRL(totalGanho)}</Text>
         </Flex>
       </Box>
 
       {dados.length === 0
-        ? <Text p={8} textAlign="center" color="gray.400">Nenhuma aposta de Raspadinha encontrada</Text>
+        ? <Text p={8} textAlign="center" color="#A0AEC0">Nenhuma aposta de Raspadinha encontrada</Text>
         : (
           <VStack spacing={0} align="stretch">
             {dados.map(a => (
               <Flex key={a.id} px={4} py={3} align="center"
                 borderBottom="1px solid" borderColor="gray.100">
                 <Box>
-                  <Text fontSize="sm" fontWeight="bold">{formatBRL(a.valor)}</Text>
-                  <Text fontSize="xs" color="gray.400">
+                  <Text fontSize="13px" fontWeight="bold">{formatBRL(a.valor)}</Text>
+                  <Text fontSize="12px" color="#A0AEC0">
                     {new Date(a.data).toLocaleDateString('pt-BR')}
                   </Text>
                 </Box>
@@ -331,40 +330,39 @@ function MovimentoLoteriasView({ onBack, saldo, apostas, currentUser }) {
       <Box bg="white" w="100%" minH="100vh">
         <InnerHeader title="MOVIMENTO LOTERIAS" saldo={saldo} onBack={() => setDiaAberto(null)} />
         <Box p={4}>
-          {/* Cabeçalho estilo recibo */}
-          <Text fontWeight="bold" fontSize="lg" textAlign="center" mb={1}>ZBIXO</Text>
+          <Text fontWeight="bold" fontSize="18px" textAlign="center" mb={1}>ZBIXO</Text>
           <Flex justify="space-between" mb={1}>
-            <Text fontSize="xs" fontWeight="bold">VENDEDOR</Text>
-            <Text fontSize="xs">{currentUser?.unidade || '#00000'}</Text>
+            <Text fontSize="12px" fontWeight="bold">VENDEDOR</Text>
+            <Text fontSize="12px">{currentUser?.unidade || '#00000'}</Text>
           </Flex>
           <Flex justify="space-between" mb={3}>
-            <Text fontSize="xs">{diaAberto}</Text>
-            <Text fontSize="xs">{new Date().toLocaleTimeString('pt-BR')}</Text>
+            <Text fontSize="12px">{diaAberto}</Text>
+            <Text fontSize="12px">{new Date().toLocaleTimeString('pt-BR')}</Text>
           </Flex>
           <Divider mb={3} />
 
-          <Text fontWeight="bold" textAlign="center" fontSize="sm" mb={2}>
+          <Text fontWeight="bold" textAlign="center" fontSize="13px" mb={2}>
             MOVIMENTO LOTERIAS — {diaAberto}
           </Text>
           <Divider mb={3} />
 
           {apostasNoDia.length === 0 ? (
-            <Text textAlign="center" color="gray.400" mt={6}>
+            <Text textAlign="center" color="#A0AEC0" mt={6}>
               NÃO HÁ MOVIMENTO NA DATA
             </Text>
           ) : (
             <VStack spacing={2} align="stretch" mb={4}>
               {apostasNoDia.map(a => (
                 <Flex key={a.id} justify="space-between" py={2}
-                  borderBottom="1px dashed" borderColor="gray.200">
+                  borderBottom="1px dashed" borderColor="#EDF2F7">
                   <Box>
-                    <Text fontSize="xs" fontWeight="bold">{a.descricao}</Text>
-                    <Text fontSize="xs" color="gray.500">
+                    <Text fontSize="12px" fontWeight="bold">{a.descricao}</Text>
+                    <Text fontSize="12px" color="#A0AEC0">
                       {Array.isArray(a.palpites) ? a.palpites.join('-') : a.palpites}
                     </Text>
-                    <Text fontSize="xs" color="gray.400">Cód: {a.codigo}</Text>
+                    <Text fontSize="12px" color="#A0AEC0">Cód: {a.codigo}</Text>
                   </Box>
-                  <Text fontSize="sm" fontWeight="bold" color="red.500">
+                  <Text fontSize="13px" fontWeight="bold" color="#E53E3E">
                     - {formatBRL(a.valor)}
                   </Text>
                 </Flex>
@@ -374,15 +372,15 @@ function MovimentoLoteriasView({ onBack, saldo, apostas, currentUser }) {
 
           <Divider mb={2} />
           <Flex justify="space-between" mb={1}>
-            <Text fontSize="sm" fontWeight="bold">TOTAL VENDAS JB:</Text>
-            <Text fontSize="sm" color="red.500">- {formatBRL(totalVendas)}</Text>
+            <Text fontSize="13px" fontWeight="bold">TOTAL VENDAS JB:</Text>
+            <Text fontSize="13px" color="#E53E3E">- {formatBRL(totalVendas)}</Text>
           </Flex>
           <Flex justify="space-between" mb={4}>
-            <Text fontSize="sm" fontWeight="bold">TOTAL PRÊMIOS:</Text>
-            <Text fontSize="sm" color="green.500">+ {formatBRL(totalPremios)}</Text>
+            <Text fontSize="13px" fontWeight="bold">TOTAL PRÊMIOS:</Text>
+            <Text fontSize="13px" color="#38A169">+ {formatBRL(totalPremios)}</Text>
           </Flex>
 
-          <Button w="full" bg="black" color="white" h="50px"
+          <Button w="full" bg="#1A202C" color="white" h="50px"
             onClick={() => {
               const texto = `ZBIXO — MOVIMENTO LOTERIAS\n${diaAberto}\n` +
                 apostasNoDia.map(a => `${a.descricao} — ${formatBRL(a.valor)}`).join('\n') +
@@ -403,16 +401,16 @@ function MovimentoLoteriasView({ onBack, saldo, apostas, currentUser }) {
         {dias.map(dia => (
           <Flex key={dia} px={4} py={4} align="center"
             borderBottom="1px solid" borderColor="gray.100"
-            cursor="pointer" _hover={{ bg: 'gray.50' }}
+            cursor="pointer" _hover={{ bg: '#F7FAFC' }}
             onClick={() => setDiaAberto(dia)}>
-            <Text fontSize="sm">{dia}</Text>
+            <Text fontSize="13px">{dia}</Text>
             <Spacer />
             {agrupadas[dia] && (
-              <Text fontSize="xs" color="gray.400" mr={2}>
+              <Text fontSize="12px" color="#A0AEC0" mr={2}>
                 {agrupadas[dia].length} aposta(s)
               </Text>
             )}
-            <Icon as={FaChevronRight} color="gray.400" boxSize={4} />
+            <Icon as={FaChevronRight} color="#A0AEC0" boxSize={4} />
           </Flex>
         ))}
       </VStack>
@@ -429,11 +427,11 @@ function CotacoesRelView({ onBack, saldo, setAppView }) {
         {['LOTERIAS', 'QUININHA', 'SENINHA', 'LOTINHA'].map(c => (
           <Flex key={c} px={4} py={4} align="center"
             borderBottom="1px solid" borderColor="gray.100"
-            cursor="pointer" _hover={{ bg: 'gray.50' }}
+            cursor="pointer" _hover={{ bg: '#F7FAFC' }}
             onClick={() => c === 'LOTERIAS' && setAppView('loteriasCotacao')}>
-            <Text fontSize="sm" fontWeight="bold" color="#000080">{c}</Text>
+            <Text fontSize="13px" fontWeight="bold" color="#2B6CB0">{c}</Text>
             <Spacer />
-            <Icon as={FaChevronRight} color="gray.400" boxSize={4} />
+            <Icon as={FaChevronRight} color="#A0AEC0" boxSize={4} />
           </Flex>
         ))}
       </VStack>
@@ -460,8 +458,7 @@ function RelatoriosView({ setAppView, onMenuOpen, currentUser, apostas = [], tra
 
   return (
     <Box bg="white" w="100%" minH="100vh">
-      {/* Header preto */}
-      <Flex as="header" align="center" p={4} bg="black" color="white">
+      <Flex as="header" align="center" p={4} bg="#1A202C" color="white">
         <Icon as={FaArrowLeft} boxSize={5} cursor="pointer" onClick={() => setAppView('dashboard')} />
         <Spacer />
         <Text fontWeight="bold" fontSize="13px" letterSpacing="1px">RELATÓRIOS</Text>
@@ -469,8 +466,7 @@ function RelatoriosView({ setAppView, onMenuOpen, currentUser, apostas = [], tra
         <Text fontSize="20px" cursor="pointer" onClick={onMenuOpen}>☰</Text>
       </Flex>
 
-      {/* Barra azul com saldo */}
-      <Flex align="center" px={4} py={3} bg="#000080" color="white">
+      <Flex align="center" px={4} py={3} bg="#2B6CB0" color="white">
         <Icon as={FaRotateRight} boxSize={4} cursor="pointer" />
         <Spacer />
         <Text fontWeight="bold" fontSize="16px">
@@ -480,7 +476,6 @@ function RelatoriosView({ setAppView, onMenuOpen, currentUser, apostas = [], tra
           onClick={() => setVis(v => !v)} />
       </Flex>
 
-      {/* Lista */}
       <VStack spacing={0} align="stretch">
         <ReportItem icon={FaDollarSign}   text="SALDO"              onClick={() => setSubView('saldo')} />
         <ReportItem icon={FaFileInvoice}  text="PULES"              onClick={() => setSubView('pules')} />

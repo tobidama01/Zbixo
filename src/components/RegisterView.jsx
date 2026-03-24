@@ -52,27 +52,27 @@ function RegisterView({ setView, setUsers, users }) {
   return (
     <VStack spacing={4} w="100%" align="stretch">
       <InputGroup>
-        <InputLeftElement pointerEvents="none"><Icon as={FaFileLines} color="gray.400" /></InputLeftElement>
+        <InputLeftElement pointerEvents="none"><Icon as={FaFileLines} color="#A0AEC0" /></InputLeftElement>
         <Input variant="custom" placeholder="Nome completo" value={nome} onChange={e => setNome(e.target.value)} />
       </InputGroup>
       <InputGroup>
-        <InputLeftElement pointerEvents="none"><Icon as={FaWhatsapp} color="gray.400" /></InputLeftElement>
+        <InputLeftElement pointerEvents="none"><Icon as={FaWhatsapp} color="#A0AEC0" /></InputLeftElement>
         <Input variant="custom" placeholder="WhatsApp (com DDD)" value={whatsapp} onChange={e => setWhatsapp(e.target.value)} />
       </InputGroup>
       <InputGroup>
-        <InputLeftElement pointerEvents="none"><Icon as={FaUser} color="gray.400" /></InputLeftElement>
+        <InputLeftElement pointerEvents="none"><Icon as={FaUser} color="#A0AEC0" /></InputLeftElement>
         <Input variant="custom" placeholder="CPF (somente números)" value={cpf} onChange={e => setCpf(e.target.value)} maxLength={14} />
       </InputGroup>
       <InputGroup>
-        <InputLeftElement pointerEvents="none"><Icon as={FaCalendar} color="gray.400" /></InputLeftElement>
+        <InputLeftElement pointerEvents="none"><Icon as={FaCalendar} color="#A0AEC0" /></InputLeftElement>
         <Input variant="custom" type="date" placeholder="Data de nascimento" value={dataNasc} onChange={e => setDataNasc(e.target.value)} />
       </InputGroup>
       <InputGroup>
-        <InputLeftElement pointerEvents="none"><Icon as={FaLock} color="gray.400" /></InputLeftElement>
+        <InputLeftElement pointerEvents="none"><Icon as={FaLock} color="#A0AEC0" /></InputLeftElement>
         <Input variant="custom" type="password" placeholder="Senha" value={senha} onChange={e => setSenha(e.target.value)} />
       </InputGroup>
       <Button colorScheme="submitBtn" color="black" onClick={handleRegister}>CADASTRAR</Button>
-      <Link color="white" fontSize="1.1em" display="flex" alignItems="center" justifyContent="center" onClick={() => setView('login')}>
+      <Link color="white" fontSize="16px" display="flex" alignItems="center" justifyContent="center" onClick={() => setView('login')}>
         <Icon as={FaArrowLeft} mr="8px" /> Voltar
       </Link>
     </VStack>

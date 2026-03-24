@@ -29,19 +29,19 @@ function HoroscopoView({ onBack, onMenuOpen, currentUser }) {
       <Box bg="white" w="100%" minH="100vh">
         <AppHeader title="HORÓSCOPO" saldo={saldo} onBack={() => setSelecionado(null)} onMenuOpen={onMenuOpen} />
         <Box p={4} textAlign="center">
-          <Text fontSize="4xl">{selecionado.emoji}</Text>
-          <Text fontWeight="bold" fontSize="xl" mt={2}>{selecionado.nome}</Text>
+          <Text fontSize="22px">{selecionado.emoji}</Text>
+          <Text fontWeight="bold" fontSize="20px" mt={2}>{selecionado.nome}</Text>
           <Divider my={4} />
-          <Text fontWeight="bold" mb={2}>Números da sorte:</Text>
+          <Text fontWeight="bold" mb={2} fontSize="14px">Números da sorte:</Text>
           <SimpleGrid columns={4} spacing={2} mb={4}>
             {selecionado.numeros.map(n => (
-              <Badge key={n} p={2} colorScheme="blackAlpha" fontSize="lg" textAlign="center">{n}</Badge>
+              <Badge key={n} p={2} colorScheme="blackAlpha" fontSize="16px" textAlign="center">{n}</Badge>
             ))}
           </SimpleGrid>
           {bicho && (
-            <Box p={4} bg="gray.50" borderRadius="md">
-              <Text fontWeight="bold">Bicho relacionado:</Text>
-              <Text>Grupo {bicho.grupo} - {bicho.nome}</Text>
+            <Box p={4} bg="#F7FAFC" borderRadius="md">
+              <Text fontWeight="bold" fontSize="14px">Bicho relacionado:</Text>
+              <Text fontSize="14px">Grupo {bicho.grupo} - {bicho.nome}</Text>
               <Image src={bicho.img} alt={bicho.nome} h="60px" mx="auto" mt={2} />
             </Box>
           )}
@@ -54,14 +54,14 @@ function HoroscopoView({ onBack, onMenuOpen, currentUser }) {
     <Box bg="white" w="100%" minH="100vh">
       <AppHeader title="HORÓSCOPO" saldo={saldo} onBack={onBack} onMenuOpen={onMenuOpen} />
       <Box p={4}>
-        <Text fontWeight="bold" fontSize="lg" mb={4}>Qual é o seu signo?</Text>
+        <Text fontWeight="bold" fontSize="18px" mb={4}>Qual é o seu signo?</Text>
         <SimpleGrid columns={3} spacing={3}>
           {SIGNOS.map(s => (
-            <Box key={s.nome} border="1px solid" borderColor="gray.200" borderRadius="12px"
-              p={3} textAlign="center" cursor="pointer" _hover={{ bg: 'gray.50' }}
+            <Box key={s.nome} border="1px solid" borderColor="#EDF2F7" borderRadius="12px"
+              p={3} textAlign="center" cursor="pointer" _hover={{ bg: '#F7FAFC' }}
               onClick={() => setSelecionado(s)}>
-              <Text fontSize="2xl">{s.emoji}</Text>
-              <Text fontSize="sm" fontWeight="medium" mt={1}>{s.nome}</Text>
+              <Text fontSize="22px">{s.emoji}</Text>
+              <Text fontSize="13px" fontWeight="medium" mt={1}>{s.nome}</Text>
             </Box>
           ))}
         </SimpleGrid>
